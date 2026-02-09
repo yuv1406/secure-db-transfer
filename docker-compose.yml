@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysql_source:
+    image: mysql:latest
+    container_name: mysql_source
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: source_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  postgres_target:
+    image: postgres:latest
+    container_name: postgres_target
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: target_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+volumes:
+  mysql_data:
+  postgres_data:
